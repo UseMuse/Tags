@@ -20,7 +20,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <ComboBox  x:Name="ComboboxTags" Grid.Row ="0" IsTextSearchEnabled="True" TextSearch.TextPath="Title" 
-                           Height="Auto" Margin="0,3" IsEditable="True" IsReadOnly="True" ItemsSource="{Binding Tags}" Text="Теги">
+                           Height="Auto" Margin="0,3" IsEditable="True" IsReadOnly="True" ItemsSource="{Binding Tags}" Text="Теги"  SelectionChanged="ComboboxTags_SelectionChanged">
                     <ComboBox.ItemContainerStyle>
                         <Style TargetType="ComboBoxItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
