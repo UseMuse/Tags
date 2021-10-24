@@ -28,7 +28,7 @@ namespace Tags
 
         private int previousSelection = 0; //Give it a default selection value
 
-        private bool promptUserForRollBackComboboxsSelectionPreviousOne = true;
+        private bool rollBackComboboxsSelectionPreviousOne = true;
 
         private void ComboboxTags_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -38,8 +38,8 @@ namespace Tags
             if (comboBox.SelectedValue != null && comboBox.SelectedIndex != previousSelection)
             {
                 string msg = "Click Yes to leave previous selection, click No to stay with your selection.";
-                if (promptUserForRollBackComboboxsSelectionPreviousOne
-                    && MessageBox.Show(msg, "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes == false)  //User have clicked No to cancel the selection
+                if (rollBackComboboxsSelectionPreviousOne
+                   /* && MessageBox.Show(msg, "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes == false*/)  //User have clicked No to cancel the selection
                 {
                     comboBox.SelectedIndex = previousSelection; //roll back the combobox's selection to previous one
 
