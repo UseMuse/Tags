@@ -15,7 +15,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-
+              
                 <Border Padding="0" Margin="0" Background="#313e4b" BorderBrush="#313e4b" BorderThickness="1" CornerRadius="15">
                     <StackPanel  Margin="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="{Binding Title}" Foreground="#f2e6dd" Margin="0,0,10,0" Padding="0" FontSize="12"/>
