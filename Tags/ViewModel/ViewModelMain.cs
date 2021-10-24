@@ -37,10 +37,15 @@ namespace Tags.ViewModel
                 var selectedTag = Tags.Where(t => t.IsChecked);
                 SelectedTags = new ObservableCollection<ViewModelTag>(selectedTag);
             });
+            SelectionChangedCommand = new RelayCommand((object parameter) =>
+            {
 
+               
+
+            });
 
         }
-
+        public ICommand SelectionChangedCommand { get; set; }
         public ICommand DropDownClosedCommand { get; set; }
     }
 }

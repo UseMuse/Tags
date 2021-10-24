@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -37,6 +38,20 @@ namespace Tags
             }
             return !isEquals;
 
+        }
+
+        /// <summary>
+        /// Глубокое сравнение двух объектов
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <param name="objOriginal"></param>
+        /// <returns>true, если равны</returns>
+        public static bool DeepСomparison<T>(this T obj, T objOriginal)
+        {
+            string dataJson = JsonConvert.SerializeObject(obj);
+            string dataoriginalJson = JsonConvert.SerializeObject(objOriginal);
+            return !IsValueChanged(dataJson, dataoriginalJson);
         }
     }
 

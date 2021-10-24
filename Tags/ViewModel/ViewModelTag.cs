@@ -47,9 +47,15 @@ namespace Tags.ViewModel
             {
 
             });
+            SelectionChangedCommand = new RelayCommand((object parameter) =>
+            {
+
+            });
 
         }
         public ICommand CheckedCommand { get; set; }
         public ICommand UncheckedCommand { get; set; }
+
+        public ICommand SelectionChangedCommand { get; set; }
     }
 }

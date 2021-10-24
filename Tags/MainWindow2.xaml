@@ -1,0 +1,66 @@
+﻿<Window x:Class="Tags.MainWindow2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:spcl="clr-namespace:System.Collections.Specialized;assembly=System"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Height="450" Width="800">
+    <FrameworkElement.Resources>
+        <spcl:StringCollection x:Key="collection">
+            <sys:String>Первый</sys:String>
+            <sys:String>Второй</sys:String>
+            <sys:String>Третий</sys:String>
+            <sys:String>Четвёртый</sys:String>
+            <sys:String>Пятый</sys:String>
+        </spcl:StringCollection>
+        <DataTemplate x:Key="list.ItemTemplate"
+                      DataType="{x:Type sys:String}">
+            <CheckBox Content="{Binding Mode=OneWay}"
+                      IsChecked="{Binding IsSelected,
+                                          RelativeSource={RelativeSource FindAncestor,
+                                                                         AncestorType={x:Type ListBoxItem}}}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="header.ItemTemplate"
+                      DataType="{x:Type sys:String}">
+            <Grid Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="#667079" BorderBrush="#667079" BorderThickness="1" CornerRadius="15" Padding="0" Margin="0">
+                    <StackPanel  Margin="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding}" Foreground="#f5ede5"/>
+                        <Button Grid.Column="1"  Background="#667079" 
+                        Content="❌" Foreground="#313e4b"
+                        Click="OnDeleteClick"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="header.Panel">
+            <WrapPanel/>
+        </ItemsPanelTemplate>
+    </FrameworkElement.Resources>
+    <UniformGrid Columns="1">
+        <Expander Width="auto">
+            <Expander.Header>
+                <ItemsControl ItemsSource="{Binding SelectedItems, ElementName=listBox}"
+                      ItemsPanel="{DynamicResource header.Panel}"
+                      ItemTemplate="{DynamicResource header.ItemTemplate}"/>
+            </Expander.Header>
+            <Expander.Content>
+                <ListBox x:Name="listBox" ItemsSource="{DynamicResource collection}"
+                 ItemTemplate="{DynamicResource list.ItemTemplate}"
+                 SelectionMode="Multiple"/>
+            </Expander.Content>
+        </Expander>
+    </UniformGrid>
+    <x:Code>
+        <![CDATA[
+        private void OnDeleteClick(object sender, RoutedEventArgs e)
+        {
+            FrameworkElement element = (FrameworkElement)sender;
+            string item = (string)element.DataContext;
+            listBox.SelectedItems.Remove(item);
+        }]]>
+    </x:Code>
+</Window>
