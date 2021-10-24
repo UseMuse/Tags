@@ -36,29 +36,37 @@
             <WrapPanel/>
         </ItemsPanelTemplate>
     </FrameworkElement.Resources>
-    <UniformGrid Columns="1">
-        <Expander >
-            <Expander.Header>
-                <ItemsControl ItemsSource="{Binding SelectedItems, ElementName=listBox}"
+    <Grid x:Name="grid">
+        <StackPanel>
+            <Border x:Name="border"/>
+            <Expander x:Name="expander" >
+                <Expander.Header>
+                    <ItemsControl ItemsSource="{Binding SelectedItems, ElementName=listBox}"
                       ItemsPanel="{DynamicResource header.Panel}"
                       ItemTemplate="{DynamicResource header.ItemTemplate}"/>
-            </Expander.Header>
-            <Expander.Content>
-                <ListBox x:Name="listBox" ItemsSource="{Binding Tags}"
-                 SelectionMode="Multiple">
+                </Expander.Header>
+            </Expander>
+            <Popup IsOpen="{Binding IsExpanded, ElementName=expander}"
+                   PlacementTarget="{Binding ElementName=border, Mode=OneWay}"
+                   StaysOpen="True"
+                   VerticalOffset="{Binding ActualHeight, ElementName=expander, Mode=OneWay}"
+                   MaxHeight="{Binding ActualHeight, ElementName=grid, Mode=OneWay}">
+                <ListBox x:Name="listBox"
+                         ItemsSource="{Binding Tags}"
+                         SelectionMode="Multiple">
                     <ListBox.ItemTemplate>
-                        <DataTemplate 
-                      DataType="{x:Type sys:String}">
+                        <DataTemplate DataType="{x:Type sys:String}">
                             <CheckBox Content="{Binding Title, Mode=OneWay}"
-                      IsChecked="{Binding IsSelected,
-                                          RelativeSource={RelativeSource FindAncestor,
-                                                                         AncestorType={x:Type ListBoxItem}}}"/>
+                                      IsChecked="{Binding IsSelected,
+                                                          RelativeSource={RelativeSource FindAncestor,
+                                                                                         AncestorType={x:Type ListBoxItem}}}"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </Expander.Content>
-        </Expander>
-    </UniformGrid>
+            </Popup>
+            <TextBlock x:Name="textBlock" Text="Другой элемент для проверки компоновки"/>
+        </StackPanel>
+    </Grid>
     <x:Code>
         <![CDATA[
         private void OnDeleteClick(object sender, RoutedEventArgs e)

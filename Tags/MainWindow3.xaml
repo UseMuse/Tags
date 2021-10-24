@@ -9,7 +9,7 @@
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.Resources>
         <ControlTemplate x:Key="ComboboxToggleButton" TargetType="{x:Type ToggleButton}">
-            <Grid Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}">
+            <Grid Background="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type Expander}}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="35" />

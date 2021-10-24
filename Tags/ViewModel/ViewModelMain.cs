@@ -10,12 +10,8 @@ namespace Tags.ViewModel
 {
     public class ViewModelMain : BaseInpc
     {
-        private ObservableCollection<ViewModelTag> _tags;
-        public ObservableCollection<ViewModelTag> Tags
-        {
-            get => _tags;
-            private set => Set(ref _tags, value);
-        }
+        public ObservableCollection<ViewModelTag> Tags { get; }
+            = new ObservableCollection<ViewModelTag>();
 
         private ObservableCollection<ViewModelTag> _selectedTags;
         public ObservableCollection<ViewModelTag> SelectedTags
@@ -26,12 +22,13 @@ namespace Tags.ViewModel
 
         public ViewModelMain()
         {
-            var t1 = new ViewModelTag("Тег 1");
-            var t2 = new ViewModelTag("Тег 2");
-            var t3 = new ViewModelTag("Тег 3");
-            var tags = new List<ViewModelTag>() { ViewModelTag.FirstTag, t1, t2, t3 };
+            Tags.Add(ViewModelTag.FirstTag);
+            for (int i = 1; i < 300; i++)
+            {
+                var t = new ViewModelTag($"Тег #{i:000}");
+                Tags.Add(t);
+            }
 
-            Tags = new ObservableCollection<ViewModelTag>(tags);
             DropDownClosedCommand = new RelayCommand((object parameter) =>
             {
                 var selectedTag = Tags.Where(t => t.IsChecked);
@@ -40,7 +37,7 @@ namespace Tags.ViewModel
             SelectionChangedCommand = new RelayCommand((object parameter) =>
             {
 
-               
+
 
             });
 
