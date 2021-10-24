@@ -9,6 +9,15 @@
     <Window.DataContext>
         <VM:ViewModelMain />
     </Window.DataContext>
+    <Window.Resources>
+        <Style  x:Key="cb" TargetType="CheckBox" >
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsEnabled}" Value="false">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Border>
         <DockPanel>
             <Grid DockPanel.Dock="Top" Background="Azure">
@@ -25,8 +34,8 @@
                         <Style TargetType="ComboBoxItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                             <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                            <!--<Setter Property="Margin" Value="0"/>
-                            <Setter Property="Padding" Value="0"/>-->
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsEnabled}" Value="false">
                                     <Setter Property="Visibility" Value="Collapsed"></Setter>

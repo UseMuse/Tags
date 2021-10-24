@@ -15,7 +15,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-
+              
                 <Border Padding="0" Margin="0" Background="#313e4b" BorderBrush="#313e4b" BorderThickness="1" CornerRadius="15">
                     <StackPanel  Margin="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="{Binding Title}" Foreground="#f2e6dd" Margin="0,0,10,0" Padding="0" FontSize="12"/>
@@ -39,9 +39,23 @@
     <UniformGrid Columns="1">
         <Expander >
             <Expander.Header>
-                <ItemsControl ItemsSource="{Binding SelectedItems, ElementName=listBox}"
+               
+                    <TextBox Text="{Binding Title}"  Background="AliceBlue">
+                        <TextBox.Template>
+                            <ControlTemplate TargetType="{x:Type TextBox}">
+
+                                <WrapPanel Orientation="Horizontal">
+                                    <ItemsControl  Grid.Row="0" Grid.Column="1"  ItemsSource="{Binding SelectedItems, ElementName=listBox}"
                       ItemsPanel="{DynamicResource header.Panel}"
                       ItemTemplate="{DynamicResource header.ItemTemplate}"/>
+
+                                    <TextBox Grid.Row="0" Grid.Column="1" Width="150" Height="30" Text="{TemplateBinding Text}" BorderThickness="1"/>
+                          
+                            </WrapPanel>
+                        </ControlTemplate>
+                        </TextBox.Template>
+                    </TextBox>
+              
             </Expander.Header>
             <Expander.Content>
                 <ListBox x:Name="listBox" ItemsSource="{Binding Tags}"

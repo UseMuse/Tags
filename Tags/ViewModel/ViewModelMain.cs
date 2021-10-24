@@ -23,7 +23,12 @@ namespace Tags.ViewModel
             get => _selectedTags;
             private set => Set(ref _selectedTags, value);
         }
-
+        private ViewModelTag _selectedTag = ViewModelTag.FirstTag;
+        public ViewModelTag SelectedTag
+        {
+            get => _selectedTag;
+            set => Set(ref _selectedTag, value);
+        }
         public ViewModelMain()
         {
             var t1 = new ViewModelTag("Тег 1");
@@ -40,7 +45,7 @@ namespace Tags.ViewModel
             SelectionChangedCommand = new RelayCommand((object parameter) =>
             {
 
-               
+
 
             });
 
