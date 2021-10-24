@@ -9,6 +9,8 @@ namespace Tags.ViewModel
 {
     public class ViewModelTag : BaseInpc
     {
+        public static ViewModelTag FirstTag = new ViewModelTag("Теги", false);
+
         private bool isChecked;
         public bool IsChecked
         {
@@ -23,6 +25,16 @@ namespace Tags.ViewModel
             set => Set(ref title, value);
         }
 
+        private bool isEnabled = true;
+        public bool IsEnabled
+        {
+            get => isEnabled;
+            set => Set(ref isEnabled, value);
+        }
+        public ViewModelTag(string title, bool isEnabled) : this(title)
+        {
+            IsEnabled = isEnabled;
+        }
         public ViewModelTag(string title)
         {
             this.Title = title;

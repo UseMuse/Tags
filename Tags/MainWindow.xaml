@@ -19,24 +19,31 @@
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <ComboBox  x:Name="ComboboxTags" Grid.Row ="0" IsTextSearchEnabled="True" TextSearch.TextPath="Title" 
+                <ComboBox  x:Name="ComboboxTags" Grid.Row ="0" IsTextSearchEnabled="True" TextSearch.TextPath="Title"  SelectedIndex="0"
                            Height="Auto" Margin="0,3" IsEditable="True" IsReadOnly="True" ItemsSource="{Binding Tags}" Text="Теги"  SelectionChanged="ComboboxTags_SelectionChanged">
                     <ComboBox.ItemContainerStyle>
                         <Style TargetType="ComboBoxItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                             <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                            <!--<Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>-->
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsEnabled}" Value="false">
+                                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
                         </Style>
                     </ComboBox.ItemContainerStyle>
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding IsChecked}" Content="{Binding Title}" >
+                            <CheckBox IsChecked="{Binding IsChecked}" Content="{Binding Title}" IsEnabled="{Binding IsEnabled}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="Checked">
-                                    <i:InvokeCommandAction Command="{Binding CheckedCommand}" CommandParameter="{Binding}" />
-                                </i:EventTrigger>
-                                <i:EventTrigger EventName="Unchecked">
-                                    <i:InvokeCommandAction Command="{Binding  UncheckedCommand}" CommandParameter="{Binding}"/>
-                                </i:EventTrigger>
+                                        <i:InvokeCommandAction Command="{Binding CheckedCommand}" CommandParameter="{Binding}" />
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="Unchecked">
+                                        <i:InvokeCommandAction Command="{Binding  UncheckedCommand}" CommandParameter="{Binding}"/>
+                                    </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </CheckBox>
                         </DataTemplate>
@@ -56,9 +63,9 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
-          
+
         </DockPanel>
     </Border>
-        
-    
+
+
 </Window>

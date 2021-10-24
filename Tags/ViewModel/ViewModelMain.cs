@@ -29,7 +29,7 @@ namespace Tags.ViewModel
             var t1 = new ViewModelTag("Тег 1");
             var t2 = new ViewModelTag("Тег 2");
             var t3 = new ViewModelTag("Тег 3");
-            var tags = new List<ViewModelTag>() { t1, t2, t3 };
+            var tags = new List<ViewModelTag>() { ViewModelTag.FirstTag, t1, t2, t3 };
 
             Tags = new ObservableCollection<ViewModelTag>(tags);
             DropDownClosedCommand = new RelayCommand((object parameter) =>
