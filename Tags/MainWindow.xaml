@@ -5,16 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tags" xmlns:VM="clr-namespace:Tags.ViewModel" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="590">
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="MainWindow" Height="450" Width="590"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.DataContext>
         <VM:ViewModelMain />
     </Window.DataContext>
     <Window.Resources>
-        <Style  x:Key="cb" TargetType="CheckBox" >
+        <Style TargetType="ToolTip">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding IsEnabled}" Value="false">
-                    <Setter Property="Visibility" Value="Collapsed"></Setter>
-                </DataTrigger>
+                <Trigger Property="Content"
+                 Value="{x:Static sys:String.Empty}">
+                    <Setter Property="Visibility"
+                    Value="Collapsed" />
+                </Trigger>
+                <Trigger Property="Content"
+                 Value="{x:Null}">
+                    <Setter Property="Visibility"
+                    Value="Collapsed" />
+                </Trigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
@@ -28,11 +37,11 @@
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <ComboBox  x:Name="ComboboxTags" Grid.Row ="0" IsTextSearchEnabled="True" TextSearch.TextPath="Title"  SelectedIndex="0"
-                           Height="Auto" Margin="0,3" IsEditable="True" IsReadOnly="True" ItemsSource="{Binding Tags}" Text="Теги"  SelectionChanged="ComboboxTags_SelectionChanged">
+                <ComboBox ToolTip="{Binding ToolTipSelectedTags}" StaysOpenOnEdit="True"  x:Name="ComboboxTags" Grid.Row ="0" IsTextSearchCaseSensitive="False"  IsTextSearchEnabled="True" TextSearch.TextPath="Title"  SelectedIndex="0"
+                           Height="Auto" Margin="0,3" ItemsSource="{Binding Tags}" Text="Теги"  SelectionChanged="ComboboxTags_SelectionChanged" DropDownClosed="ComboboxTags_DropDownClosed">
                     <ComboBox.ItemContainerStyle>
                         <Style TargetType="ComboBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                          <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                             <Setter Property="VerticalContentAlignment" Value="Stretch" />
                             <Setter Property="Margin" Value="0"/>
                             <Setter Property="Padding" Value="0"/>
@@ -60,6 +69,9 @@
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="DropDownClosed">
                             <i:InvokeCommandAction Command="{Binding DropDownClosedCommand}" CommandParameter="{Binding}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,6 +42,11 @@ namespace Tags
                 if (rollBackComboboxsSelectionPreviousOne
                    /* && MessageBox.Show(msg, "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes == false*/)  //User have clicked No to cancel the selection
                 {
+                    var SelectedTag = comboBox.SelectedItem as ViewModelTag;
+                    if(SelectedTag != null)
+                    {
+                        SelectedTag.IsChecked = !SelectedTag.IsChecked;
+                    }
                     comboBox.SelectedIndex = previousSelection; //roll back the combobox's selection to previous one
 
                 }

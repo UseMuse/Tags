@@ -31,6 +31,9 @@ namespace Tags.ViewModel
             get => isEnabled;
             set => Set(ref isEnabled, value);
         }
+
+        public event Action Checked;
+        public event Action Unchecked;
         public ViewModelTag(string title, bool isEnabled) : this(title)
         {
             IsEnabled = isEnabled;
@@ -41,21 +44,17 @@ namespace Tags.ViewModel
 
             CheckedCommand = new RelayCommand((object parameter) =>
                      {
-
+                         Checked?.Invoke();
                      });
             UncheckedCommand = new RelayCommand((object parameter) =>
             {
-
+                Unchecked?.Invoke();
             });
-            SelectionChangedCommand = new RelayCommand((object parameter) =>
-            {
-
-            });
+     
 
         }
         public ICommand CheckedCommand { get; set; }
         public ICommand UncheckedCommand { get; set; }
-
-        public ICommand SelectionChangedCommand { get; set; }
+  
     }
 }
